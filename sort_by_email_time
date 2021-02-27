@@ -1,0 +1,20 @@
+name = input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+lst = list()
+count = dict()
+once = 0
+for line in handle:
+    if not line.startswith('From'): continue
+    if once: 
+        once = 0
+        continue
+    else:
+        word = line.split()
+    	lst = word[5].split(':')
+    	count[lst[0]]= count.get(lst[0],0)+1
+        once = 1
+    
+lst = (sorted([(k,v) for k,v in count.items()]))
+for k,v in lst:
+    print(k,v)
